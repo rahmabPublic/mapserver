@@ -4185,7 +4185,6 @@ int msPostGISLayerTranslateFilter(layerObj *layer, expressionObj *filter, char *
           break;
 
 	/* unsupported tokens */ 
-	case MS_TOKEN_COMPARISON_IEQ:
         case MS_TOKEN_COMPARISON_BEYOND:
 	case MS_TOKEN_FUNCTION_TOSTRING:
 	case MS_TOKEN_FUNCTION_ROUND:

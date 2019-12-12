@@ -891,11 +891,6 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
   /* ==================================================================== */
   /*      Process each layer with a resultset.                            */
   /* ==================================================================== */
-
-  char[] basim_hDS, basim_layerName, basim_srs, basim_eGeomType, basim_layer_options;
-
-
-
   for( iLayer = 0; iLayer < map->numlayers; iLayer++ ) {
     int status;
     layerObj *layer = GET_LAYER(map, iLayer);
@@ -993,28 +988,13 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
       OGR_DS_Destroy( hDS );
       msOGRCleanupDS( datasource_name );
       msSetError( MS_MISCERR,
-                  "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. \n\n %s\n\n %s\n\n %s\n\n %s\n\n %s\n\n %s\n\n %s\n\n %s\n\n %s\n\n %s",
+                  "Basim \nBasim \nBasim \nBasim \nBasim \n OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'.",
                   "msOGRWriteFromQuery()",
                   layer->name,
-                  format->driver+4,
-                  hDS,
-                  layer->name,
-                  srs,
-                  eGeomType,
-                  layer_options,
-                  basim_hDS,
-                  basim_layerName,
-                  basim_srs,
-                  basim_eGeomType,
-                  basim_layer_options );
+                  format->driver+4 );
       CSLDestroy(layer_options);
       return MS_FAILURE;
     }
-    basim_hDS[] = hDS;
-    basim_layerName[] = layer->name;
-    basim_srs[] = srs;
-    basim_eGeomType[] = eGeomType;
-    basim_layer_options[] = layer_options;
 
     if( srs != NULL )
       OSRRelease( srs );

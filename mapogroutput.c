@@ -983,7 +983,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
     /*      Create the corresponding OGR Layer.                             */
     /* -------------------------------------------------------------------- */
     hOGRLayer = OGR_DS_CreateLayer( hDS, layer->name, srs, eGeomType,
-                                    layer_options );
+                                    format->driver+4 );
     if( hOGRLayer == NULL ) {
       OGR_DS_Destroy( hDS );
       msOGRCleanupDS( datasource_name );

@@ -987,13 +987,30 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
     if( hOGRLayer == NULL ) {
       OGR_DS_Destroy( hDS );
       msOGRCleanupDS( datasource_name );
+      char str[12];
+      printf ("Enter a number: \n");
+      printf ("Enter a number: \n");
+      printf ("Enter a number: \n");
+      printf ("Enter a number: \n");
+      printf ("Enter a number: \n");
+      sprintf(str, "%d", iLayer);
+      sprintf(str, "%d", iLayer);
+      sprintf(str, "%d", iLayer);
+      sprintf(str, "%d", iLayer);
+      printf ("\nEnter a number: ");
+      printf ("Enter a number: ");
+      printf ("Enter a number: ");
+      printf ("Enter a number: ");
+      printf ("Enter a number: ");
+      printf ("Enter a number: ");
+      printf ("Enter a number: ");
+      
       msSetError( MS_MISCERR,
-                  "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n %s \niLayer= %s",
+                  "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n %s \n",
                    "msOGRWriteFromQuery()\n\n",
                   layer->name,
                   format->driver+4,
-                  layer_options,
-                  iLayer );
+                  layer_options );
       CSLDestroy(layer_options);
       return MS_FAILURE;
     }

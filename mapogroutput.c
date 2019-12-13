@@ -988,7 +988,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
       OGR_DS_Destroy( hDS );
       msOGRCleanupDS( datasource_name );
       msSetError( MS_MISCERR,
-                  "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. Basim2222222222 \nBasim2222222222 \n %s ",
+                  "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n %s ",
                   "msOGRWriteFromQuery()\n\n",
                   layer->name,
                   format->driver+4,

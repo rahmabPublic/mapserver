@@ -760,7 +760,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
                 "STORAGE=%s value not supported.",
                 "msOGRWriteFromQuery()",
                 storage );
-    // CSLDestroy(layer_options);
+    CSLDestroy(layer_options);
     CSLDestroy(ds_options);
     return MS_FAILURE;
   }
@@ -792,7 +792,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
                   "msOGRWriteFromQuery()",
                   dir_to_create );
       msFree(request_dir);
-      // CSLDestroy(layer_options);
+      CSLDestroy(layer_options);
       CSLDestroy(ds_options);
       return MS_FAILURE;
     }
@@ -822,7 +822,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
            "It must not contain any directory information.",
            "msOGRWriteFromQuery()" );
     msFree(request_dir);
-    // CSLDestroy(layer_options);
+    CSLDestroy(layer_options);
     CSLDestroy(ds_options);
     return MS_FAILURE;
   }
@@ -884,7 +884,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
                 "msOGRWriteFromQuery()",
                 datasource_name,
                 format->driver+4 );
-    // CSLDestroy(layer_options);
+    CSLDestroy(layer_options);
     return MS_FAILURE;
   }
 
@@ -982,31 +982,26 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
     /* -------------------------------------------------------------------- */
     /*      Create the corresponding OGR Layer.                             */
     /* -------------------------------------------------------------------- */
+
+    if (layer_options == null) {
+        for( i=0; i < format->numformatoptions; i++ ) {
+        if( strncasecmp(format->formatoptions[i],"LCO:",4) == 0 )
+          layer_options = CSLAddString( layer_options,
+                                        format->formatoptions[i] + 4 );
+        if( strncasecmp(format->formatoptions[i],"DSCO:",5) == 0 )
+          ds_options = CSLAddString( ds_options,
+                                    format->formatoptions[i] + 5 );
+      }
+    }
+
     hOGRLayer = OGR_DS_CreateLayer( hDS, layer->name, srs, eGeomType,
                                     layer_options );
     if( hOGRLayer == NULL ) {
       OGR_DS_Destroy( hDS );
       msOGRCleanupDS( datasource_name );
-      char str[12];
-      printf ("Enter a number: \n");
-      printf ("Enter a number: \n");
-      printf ("Enter a number: \n");
-      printf ("Enter a number: \n");
-      printf ("Enter a number: \n");
-      sprintf(str, "%d", iLayer);
-      sprintf(str, "%d", iLayer);
-      sprintf(str, "%d", iLayer);
-      sprintf(str, "%d", iLayer);
-      printf ("\nEnter a number: ");
-      printf ("Enter a number: ");
-      printf ("Enter a number: ");
-      printf ("Enter a number: ");
-      printf ("Enter a number: ");
-      printf ("Enter a number: ");
-      printf ("Enter a number: ");
       
       msSetError( MS_MISCERR,
-                  "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n %s \n",
+                  "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. \nBasim654654654\n %s \n",
                    "msOGRWriteFromQuery()\n\n",
                   layer->name,
                   format->driver+4,
@@ -1080,7 +1075,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
         OGR_DS_Destroy( hDS );
         msOGRCleanupDS( datasource_name );
         msGMLFreeItems(item_list);
-        // CSLDestroy(layer_options);
+        CSLDestroy(layer_options);
         return MS_FAILURE;
       }
 
@@ -1101,7 +1096,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
           OGR_DS_Destroy( hDS );
           msOGRCleanupDS( datasource_name );
           msGMLFreeItems(item_list);
-          // CSLDestroy(layer_options);
+          CSLDestroy(layer_options);
           return status;
         }
       }
@@ -1132,7 +1127,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
             msOGRCleanupDS( datasource_name );
             msGMLFreeItems(item_list);
             msFreeShape(&resultshape);
-            // CSLDestroy(layer_options);
+            CSLDestroy(layer_options);
             return status;
         }
       }
@@ -1184,7 +1179,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
         msOGRCleanupDS( datasource_name );
         msGMLFreeItems(item_list);
         msFreeShape(&resultshape);
-        // CSLDestroy(layer_options);
+        CSLDestroy(layer_options);
         return status;
       }
     }

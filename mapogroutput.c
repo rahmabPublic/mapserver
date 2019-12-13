@@ -983,13 +983,13 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
     /*      Create the corresponding OGR Layer.                             */
     /* -------------------------------------------------------------------- */
     hOGRLayer = OGR_DS_CreateLayer( hDS, layer->name, srs, eGeomType,
-                                    format->driver+4 );
+                                    layer_options );
     if( hOGRLayer == NULL ) {
       OGR_DS_Destroy( hDS );
       msOGRCleanupDS( datasource_name );
       msSetError( MS_MISCERR,
                   "OGR OGR_DS_CreateLayer failed for layer '%s' with driver '%s'. Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n Basim33333333 \nBasim33333333 \n %s ",
-                  "msOGRWriteFromQuery()\n\n",
+                   "msOGRWriteFromQuery()\n\n",
                   layer->name,
                   format->driver+4,
                   layer_options );

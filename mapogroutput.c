@@ -715,7 +715,7 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
   /* -------------------------------------------------------------------- */
   /*      Capture datasource and layer creation options.                  */
   /* -------------------------------------------------------------------- */
-  for( i=0; i < format->numformatoptions; i++ ) {
+  for( i=0; i < format->numformatoptions + 1; i++ ) {
     if( strncasecmp(format->formatoptions[i],"LCO:",4) == 0 )
       layer_options = CSLAddString( layer_options,
                                     format->formatoptions[i] + 4 );
@@ -982,18 +982,6 @@ int msOGRWriteFromQuery( mapObj *map, outputFormatObj *format, int sendheaders )
     /* -------------------------------------------------------------------- */
     /*      Create the corresponding OGR Layer.                             */
     /* -------------------------------------------------------------------- */
-
-    if (layer_options == null) {
-        for( i=0; i < format->numformatoptions; i++ ) {
-        if( strncasecmp(format->formatoptions[i],"LCO:",4) == 0 )
-          layer_options = CSLAddString( layer_options,
-                                        format->formatoptions[i] + 4 );
-        if( strncasecmp(format->formatoptions[i],"DSCO:",5) == 0 )
-          ds_options = CSLAddString( ds_options,
-                                    format->formatoptions[i] + 5 );
-      }
-    }
-
     hOGRLayer = OGR_DS_CreateLayer( hDS, layer->name, srs, eGeomType,
                                     layer_options );
     if( hOGRLayer == NULL ) {
